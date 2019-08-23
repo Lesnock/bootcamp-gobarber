@@ -1,18 +1,21 @@
 import express from 'express'
-import routes from './routes'
+import { Public, Private } from './routes'
+
+import './database'
 
 class App {
     constructor ()
     {
         this.server = express()
 
-        this.routes()
         this.middlewares()
+        this.routes()
     }
 
     routes () 
     {
-        this.server.use(routes)
+        this.server.use(Public)
+        this.server.use(Private)
     }
 
     middlewares () 
