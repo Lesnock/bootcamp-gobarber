@@ -1,5 +1,4 @@
-class Controller
-{
+class Controller {
 
 }
 
