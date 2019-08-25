@@ -45,7 +45,7 @@ class UserController extends Controller
         }
 
         //trying to change email
-        if (email !== user.email) {
+        if (email && email !== user.email) {
             const emailExists = await User.hasEmail(req.body.email)
 
             if (emailExists) {
@@ -59,9 +59,9 @@ class UserController extends Controller
         if (oldPassword && !await user.checkPassword(oldPassword))
             return res.status(400).json({ error: message('wrong-credentials') })
 
-        const { id, name, provider } = await user.update(req.body)
+        const { id, name, email:dbEmail, provider } = await user.update(req.body)
 
-        return res.json({ id, name, email, provider })
+        return res.json({ id, name, email:dbEmail, provider })
     }
 }
 
