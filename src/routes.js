@@ -1,8 +1,12 @@
 import { Router } from 'express'
+
+// Middlewares
 import authMiddleware from './app/middlewares/auth'
+import { single } from './app/middlewares/upload'
 
 // Controllers
 import UserController from './app/controllers/UserController'
+import FileController from './app/controllers/FileController'
 import LoginController from './app/controllers/LoginController'
 
 // Public routes
@@ -15,3 +19,5 @@ Public.post('/login', LoginController.store)
 export const Private = new Router()
 Private.use(authMiddleware)
 Private.put('/users', UserController.update)
+
+Private.post('/files', single('file'), FileController.store)

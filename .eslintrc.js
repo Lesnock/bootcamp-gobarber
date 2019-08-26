@@ -16,8 +16,11 @@ module.exports = {
   },
   rules: {
     "no-param-reassign": "off",
+    "no-unused-vars": "off",
+    "import/prefer-default-export": "off",
     "space-before-function-paren": "off",
     "class-methods-use-this": "off",
+    "import/order": "off",
     "indent": ["error", 4],
     "semi": ["error", "never"],
     "object-curly-newline": ["error", {

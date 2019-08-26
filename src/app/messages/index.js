@@ -12,6 +12,9 @@ const messages = {
     'validation-fails': 'Validation fails!',
     'password-different': 'Password are different',
     'password-required': 'Password is required',
+
+    // Upload
+    'invalid-mime': 'Invalid file type',
 }
 
 export default function message (name) {

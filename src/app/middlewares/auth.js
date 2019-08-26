@@ -1,13 +1,15 @@
 import jwt from 'jsonwebtoken'
 import { promisify } from 'util'
 import User from '../models/User'
+import message from '../messages/index'
 import authConfig from '../../config/auth'
-import { message } from '../messages/index'
 
 export default async (req, res, next) => {
     const authHeader = req.headers.authorization
 
-    if (!authHeader) { return res.json({ error: message('token-not-provided') }) }
+    if (!authHeader) {
+        return res.json({ error: message('token-not-provided') })
+    }
 
     const [, token] = authHeader.split(' ')
 

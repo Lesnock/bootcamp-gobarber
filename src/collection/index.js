@@ -13,7 +13,9 @@ class Collection {
 
             const newItem = {}
 
-            fields.forEach((field) => newItem[field] = item[field])
+            fields.forEach((field) => {
+                newItem[field] = item[field]
+            })
 
             return newItem
         })
