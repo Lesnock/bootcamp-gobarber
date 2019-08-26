@@ -5,11 +5,11 @@ export const LoginSchema = Yup.object({
         .string()
         .email()
         .required(),
-    
+
     password: Yup
         .string()
         .min(6)
         .required()
         .strict(true)
-        .typeError('Must be a string')
+        .typeError('Must be a string'),
 })

@@ -1,24 +1,21 @@
 import bcrypt from 'bcryptjs'
+import Sequelize from 'sequelize'
 import BaseModel from './BaseModel'
-import Sequelize, { Model } from 'sequelize'
 
 class User extends BaseModel {
-
-    static init (sequelize) 
-    {
+    static init (sequelize) {
         super.init(
-        {
-            //Attributes
-            name: Sequelize.STRING,
-            email: Sequelize.STRING,
-            password: Sequelize.VIRTUAL,
-            password_hash: Sequelize.STRING,
-            provider: Sequelize.BOOLEAN
+            {
+            // Attributes
+                name: Sequelize.STRING,
+                email: Sequelize.STRING,
+                password: Sequelize.VIRTUAL,
+                password_hash: Sequelize.STRING,
+                provider: Sequelize.BOOLEAN,
             //
-        }, 
-        { 
-            sequelize 
-        })
+            },
+            { sequelize },
+        )
 
         this.addHook('beforeSave', async (user) => {
             if (user.password) {
@@ -29,18 +26,15 @@ class User extends BaseModel {
         return this
     }
 
-    //Verify if email exists
-    static async hasEmail (email)
-    {
-        return !! await User.findOne({ where: { email } })
+    // Verify if email exists
+    static async hasEmail (email) {
+        return !!await User.findOne({ where: { email } })
     }
 
-    //Check if password is correct
-    async checkPassword (password)
-    {
-        if (! password) 
-            return false
-        
+    // Check if password is correct
+    async checkPassword (password) {
+        if (!password) { return false }
+
         return bcrypt.compare(password, this.password_hash)
     }
 }

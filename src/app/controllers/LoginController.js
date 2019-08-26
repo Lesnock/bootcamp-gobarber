@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/User'
-import { message } from '../messages'
+import message from '../messages'
 import Controller from './Controller'
 import authConfig from '../../config/auth'
 import { LoginSchema } from '../validations/LoginValidation'

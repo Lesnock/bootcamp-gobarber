@@ -1,24 +1,19 @@
-class Collection
-{
-    constructor (collection = [])
-    {
+class Collection {
+    constructor (collection = []) {
         this.collection = collection
     }
 
-    all ()
-    {
+    all () {
         return this.collection
     }
 
-    get (fields = [])
-    {
-        return this.collection.map(item => {
-            if (! fields) 
-                return item
+    get (fields = []) {
+        return this.collection.map((item) => {
+            if (!fields) { return item }
 
             const newItem = {}
 
-            fields.forEach(field => newItem[field] = item[field])
+            fields.forEach((field) => newItem[field] = item[field])
 
             return newItem
         })

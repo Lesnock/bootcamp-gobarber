@@ -15,6 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    "no-param-reassign": "off",
     "space-before-function-paren": "off",
     "class-methods-use-this": "off",
     "indent": ["error", 4],
