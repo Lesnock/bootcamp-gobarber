@@ -21,6 +21,7 @@ module.exports = {
     "space-before-function-paren": "off",
     "class-methods-use-this": "off",
     "import/order": "off",
+    "arrow-parens": "off",
     "indent": ["error", 4],
     "semi": ["error", "never"],
     "object-curly-newline": ["error", {

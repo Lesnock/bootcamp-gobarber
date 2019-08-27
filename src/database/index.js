@@ -3,10 +3,12 @@ import databaseConfig from '../config/database'
 
 // Models
 import User from '../app/models/User'
+import File from '../app/models/File'
 
 // Models registering
 const models = [
     User,
+    File,
 ]
 
 class Database {
@@ -17,7 +19,9 @@ class Database {
     init () {
         this.connection = new Sequelize(databaseConfig)
 
-        models.forEach((model) => model.init(this.connection))
+        models
+            .map(model => model.init(this.connection))
+            .map(model => model.associate && model.associate(this.connection.models))
     }
 }
 

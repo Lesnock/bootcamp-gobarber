@@ -12,6 +12,7 @@ class User extends BaseModel {
                 password: Sequelize.VIRTUAL,
                 password_hash: Sequelize.STRING,
                 provider: Sequelize.BOOLEAN,
+                // -> avatar_id
             //
             },
             { sequelize },
@@ -24,6 +25,10 @@ class User extends BaseModel {
         })
 
         return this
+    }
+
+    static associate (models) {
+        this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' })
     }
 
     // Verify if email exists

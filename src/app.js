@@ -11,13 +11,13 @@ class App {
         this.routes()
     }
 
+    middlewares () {
+        this.server.use(express.json())
+    }
+
     routes () {
         this.server.use(Public)
         this.server.use(Private)
-    }
-
-    middlewares () {
-        this.server.use(express.json())
     }
 }
 

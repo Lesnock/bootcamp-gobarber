@@ -1,0 +1,1 @@
+export const development = { base_url: 'http://localhost:3333/' }
