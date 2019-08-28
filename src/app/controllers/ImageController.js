@@ -1,15 +1,14 @@
 import message from '../messages'
 import File from '../models/File'
-import Controller from './Controller'
 import { unlink } from '../../util/fs'
 import { saveTemp } from '../../util/image'
 import { StoreImageSchema } from '../validations/ImageValidation'
 
-class ImageController extends Controller {
+class ImageController {
     async store (req, res) {
         if (!await StoreImageSchema.isValid(req.file)) {
             await unlink(req.file.path)
-            return res.json({ error: message('invalid-mime') })
+            return res.status(400).json({ error: message('invalid-mime') })
         }
 
         await saveTemp(req.file.path, req.file.filename)

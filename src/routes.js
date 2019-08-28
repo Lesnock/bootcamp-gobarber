@@ -10,6 +10,8 @@ import UserController from './app/controllers/UserController'
 import ImageController from './app/controllers/ImageController'
 import LoginController from './app/controllers/LoginController'
 import ProviderController from './app/controllers/ProviderController'
+import ScheduleController from './app/controllers/ScheduleController'
+import AppointmentController from './app/controllers/AppointmentController'
 
 // Public routes
 export const Public = new Router()
@@ -23,5 +25,10 @@ export const Private = new Router()
 Private.use(authMiddleware)
 
 Private.put('/users', UserController.update)
+Private.get('/appointments', AppointmentController.index)
+Private.post('/appointments', AppointmentController.store)
+
+Private.get('/schedule', ScheduleController.index)
+
 Private.get('/providers', ProviderController.index)
 Private.post('/files', single('file'), ImageController.store)

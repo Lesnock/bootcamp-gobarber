@@ -24,6 +24,7 @@ module.exports = {
     "arrow-parens": "off",
     "indent": ["error", 4],
     "semi": ["error", "never"],
+    "camelcase": "off",
     "object-curly-newline": ["error", {
       multiline: true
     }]

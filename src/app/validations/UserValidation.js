@@ -19,6 +19,11 @@ export const UserCreateSchema = Yup.object({
     provider: Yup
         .boolean()
         .default(false),
+
+    avatar_id: Yup
+        .number()
+        .nullable()
+        .default(null),
 })
 
 // Update
@@ -45,7 +50,8 @@ export const UserUpdateSchema = Yup.object({
             ? confirmPassword.required().oneOf([Yup.ref('password')])
             : confirmPassword)),
 
-    provider: Yup
-        .boolean()
-        .default(false),
+    avatar_id: Yup
+        .number()
+        .nullable()
+        .default(null),
 })

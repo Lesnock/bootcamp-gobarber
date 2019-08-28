@@ -36,6 +36,10 @@ class User extends BaseModel {
         return !!await User.findOne({ where: { email } })
     }
 
+    static async isProvider (userId) {
+        return !!await User.findOne({ where: { id: userId, provider: true } })
+    }
+
     // Check if password is correct
     async checkPassword (password) {
         if (!password) { return false }

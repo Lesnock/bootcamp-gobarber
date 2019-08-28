@@ -1,9 +1,8 @@
 import User from '../models/User'
-import Controller from './Controller'
 import message from '../messages'
 import { UserCreateSchema, UserUpdateSchema } from '../validations/UserValidation'
 
-class UserController extends Controller {
+class UserController {
     async index (req, res) {
         const users = await User.findAllValues()
 
@@ -13,7 +12,7 @@ class UserController extends Controller {
     async store (req, res) {
         // Validate received data
         if (!await UserCreateSchema.isValid(req.body)) {
-            return res.json({ error: message('validation-fails') })
+            return res.status(400).json({ error: message('validation-fails') })
         }
 
         const emailExists = await User.hasEmail(req.body.email)
@@ -31,13 +30,13 @@ class UserController extends Controller {
         const { email, password, oldPassword, confirmPassword } = req.body
 
         if (!await UserUpdateSchema.isValid(req.body)) {
-            return res.json({ error: message('validation-fails') })
+            return res.status(400).json({ error: message('validation-fails') })
         }
 
         const user = await User.findByPk(req.userId)
 
         if (!user) {
-            return res.json({ error: message('user-not-exists') })
+            return res.status(400).json({ error: message('user-not-exists') })
         }
 
         // Trying to change email

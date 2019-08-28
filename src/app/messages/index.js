@@ -1,3 +1,4 @@
+
 const messages = {
     // Register
     'email-used': 'Email is already used',
@@ -7,6 +8,7 @@ const messages = {
     'token-not-provided': 'The token was not provided',
     'token-invalid': 'The token is invalid',
     'user-not-exists': 'User does not exists',
+    'no-permission': 'You dont have permission to do this action',
 
     // Validation
     'validation-fails': 'Validation fails!',
@@ -15,6 +17,12 @@ const messages = {
 
     // Upload
     'invalid-mime': 'Invalid file type',
+
+    // Appointments
+    'create-appointment-for-no-provider': 'You can only create appointments with providers',
+    'provider-cant-be-user': 'The provider cant be the user',
+    'past-date': 'The date has already passed',
+    'date-not-available': 'The date is not available',
 }
 
 export default function message (name) {

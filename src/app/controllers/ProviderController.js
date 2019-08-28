@@ -1,8 +1,7 @@
 import User from '../models/User'
 import File from '../models/File'
-import Controller from './Controller'
 
-class ProviderController extends Controller {
+class ProviderController {
     async index (req, res) {
         const providers = await User.findAll({
             where: { provider: true },
