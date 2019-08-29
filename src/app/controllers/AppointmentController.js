@@ -1,9 +1,10 @@
-import Mail from '../../mail'
 import message from '../messages'
 import User from '../models/User'
-import { extenseFormat } from '../../util/date'
+import Queue from '../../queue/'
 import Appointment from '../models/Appointment'
+import { extenseFormat } from '../../util/date'
 import Notification from '../schemas/Notification'
+import CancellationMail from '../jobs/CancellationMail'
 import { AppointmentCreateSchema } from '../validations/AppointmentValidation'
 import { startOfHour, parseISO, isBefore, isValid, subHours } from 'date-fns'
 
@@ -99,16 +100,7 @@ class AppointmentController {
         }
 
         // Send email notifying cancellation
-        await Mail.send({
-            to: `${appointment.provider.name} <${appointment.provider.email}>`,
-            subject: 'Agendamento cancelado',
-            template: 'cancellation',
-            context: {
-                providerName: appointment.provider.name,
-                userName: appointment.user.name,
-                date: extenseFormat(appointment.date),
-            },
-        })
+        Queue.add(CancellationMail.key, { appointment })
 
         appointment.canceled_at = new Date()
         await appointment.save()
