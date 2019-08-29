@@ -12,6 +12,7 @@ import LoginController from './app/controllers/LoginController'
 import ProviderController from './app/controllers/ProviderController'
 import ScheduleController from './app/controllers/ScheduleController'
 import AppointmentController from './app/controllers/AppointmentController'
+import NotificationController from './app/controllers/NotificationController'
 
 // Public routes
 export const Public = new Router()
@@ -27,6 +28,10 @@ Private.use(authMiddleware)
 Private.put('/users', UserController.update)
 Private.get('/appointments', AppointmentController.index)
 Private.post('/appointments', AppointmentController.store)
+Private.delete('/appointments/:id', AppointmentController.delete)
+
+Private.get('/notifications', NotificationController.index)
+Private.put('/notifications/:id', NotificationController.update)
 
 Private.get('/schedule', ScheduleController.index)
 

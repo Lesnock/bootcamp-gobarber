@@ -23,6 +23,9 @@ const messages = {
     'provider-cant-be-user': 'The provider cant be the user',
     'past-date': 'The date has already passed',
     'date-not-available': 'The date is not available',
+    'invalid-date': 'The date is invalid',
+    'appointment-not-found': 'Appointment not found',
+    '2-hours-in-advance': 'You can only cancel appointments 2 hours in advance',
 }
 
 export default function message (name) {

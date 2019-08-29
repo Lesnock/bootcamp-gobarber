@@ -4,9 +4,9 @@ import { UserCreateSchema, UserUpdateSchema } from '../validations/UserValidatio
 
 class UserController {
     async index (req, res) {
-        const users = await User.findAllValues()
+        const users = await User.findAll({ attributes: ['id', 'name', 'email', 'provider'] })
 
-        return res.json(users.get(['id', 'name', 'email', 'provider']))
+        return res.json(users)
     }
 
     async store (req, res) {
