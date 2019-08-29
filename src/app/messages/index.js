@@ -26,6 +26,9 @@ const messages = {
     'invalid-date': 'The date is invalid',
     'appointment-not-found': 'Appointment not found',
     '2-hours-in-advance': 'You can only cancel appointments 2 hours in advance',
+
+    // Notifications
+    'notification-not-found': 'Notification not found',
 }
 
 export default function message (name) {

@@ -1,10 +1,11 @@
+import Mail from '../../mail'
 import message from '../messages'
 import User from '../models/User'
-import pt from 'date-fns/locale/pt'
+import { extenseFormat } from '../../util/date'
 import Appointment from '../models/Appointment'
 import Notification from '../schemas/Notification'
-import { startOfHour, parseISO, isBefore, isValid, format, subHours } from 'date-fns'
 import { AppointmentCreateSchema } from '../validations/AppointmentValidation'
+import { startOfHour, parseISO, isBefore, isValid, subHours } from 'date-fns'
 
 class AppointmentController {
     async index (req, res) {
@@ -56,7 +57,7 @@ class AppointmentController {
 
         const user = await User.findByPk(req.userId)
 
-        const formattedDate = format(hourStart, "dd 'de' MMMM 'às' H:mm'h'", { locale: pt })
+        const formattedDate = extenseFormat(hourStart)
 
         // Send notification for provider
         await Notification.create({
@@ -68,7 +69,20 @@ class AppointmentController {
     }
 
     async delete (req, res) {
-        const appointment = await Appointment.findByPk(req.params.id)
+        const appointment = await Appointment.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    as: 'provider',
+                    attributes: ['id', 'name', 'email'],
+                },
+                {
+                    model: User,
+                    as: 'user',
+                    attributes: ['id', 'name'],
+                },
+            ],
+        })
 
         if (!appointment) {
             return res.json({ error: message('appointment-not-found') })
@@ -83,6 +97,18 @@ class AppointmentController {
         if (isBefore(untilDate, new Date())) {
             return res.json({ error: message('2-hours-in-advance') })
         }
+
+        // Send email notifying cancellation
+        await Mail.send({
+            to: `${appointment.provider.name} <${appointment.provider.email}>`,
+            subject: 'Agendamento cancelado',
+            template: 'cancellation',
+            context: {
+                providerName: appointment.provider.name,
+                userName: appointment.user.name,
+                date: extenseFormat(appointment.date),
+            },
+        })
 
         appointment.canceled_at = new Date()
         await appointment.save()

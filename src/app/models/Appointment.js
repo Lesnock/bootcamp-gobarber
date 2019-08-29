@@ -32,7 +32,7 @@ class Appointment extends BaseModel {
     static getEnables (userId, page = 1) {
         return Appointment.findAll({
             where: { user_id: userId, canceled_at: null },
-            order: ['date'],
+            order: [['date', 'desc']],
             attributes: ['id', 'date', 'user_id'],
             limit: pagination,
             offset: (page - 1) * pagination,

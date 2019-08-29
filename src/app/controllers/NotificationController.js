@@ -20,9 +20,15 @@ class NotificationController {
             return res.status(401).json({ error: message('no-permission') })
         }
 
-        const notification = await Notification.findByIdAndUpdate(req.params.id,
+        const notification = await Notification.findByIdAndUpdate(
+            req.params.id,
             { read: true },
-            { new: true })
+            { new: true },
+        )
+
+        if (!notification) {
+            return res.json({ error: message('notification-not-found') })
+        }
 
         return res.json(notification)
     }
