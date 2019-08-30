@@ -19,7 +19,8 @@ const messages = {
     'invalid-mime': 'Invalid file type',
 
     // Appointments
-    'create-appointment-for-no-provider': 'You can only create appointments with providers',
+    'create-appointment-for-no-provider': 'You can only create appointments for providers',
+    'list-appointment-for-no-provider': 'You can only list appointments for providers',
     'provider-cant-be-user': 'The provider cant be the user',
     'past-date': 'The date has already passed',
     'date-not-available': 'The date is not available',

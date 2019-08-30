@@ -1,6 +1,5 @@
 import Sequelize from 'sequelize'
 import BaseModel from './BaseModel'
-import { development } from '../../config/server'
 
 class File extends BaseModel {
     static init (sequelize) {
@@ -12,7 +11,7 @@ class File extends BaseModel {
                 url: {
                     type: Sequelize.VIRTUAL,
                     get () {
-                        return `${development.base_url}files/${this.path}`
+                        return `${process.env.APP_URL}files/${this.path}`
                     },
                 },
             //

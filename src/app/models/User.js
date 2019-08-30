@@ -37,6 +37,7 @@ class User extends BaseModel {
     }
 
     static async isProvider (userId) {
+        console.log(userId)
         return !!await User.findOne({ where: { id: userId, provider: true } })
     }
 
